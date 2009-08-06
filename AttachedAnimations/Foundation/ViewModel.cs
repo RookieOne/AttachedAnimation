@@ -9,6 +9,7 @@ namespace AttachedAnimations.Foundation
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+
         /// <summary>
         /// Called when [property changed].
         /// </summary>
