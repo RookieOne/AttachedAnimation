@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:RunABatch="clr-namespace:AttachedAnimations.RunABatch"
+    xmlns:Behaviors="clr-namespace:AttachedAnimations.Behaviors">
+    
+    <Storyboard x:Key="RotateAnimation">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle"
+                                                             From="360" To="0" 
+                                                             Duration="0:0:1"
+                                                             RepeatBehavior="Forever" />
+    </Storyboard>
+    
+    <DataTemplate DataType="{x:Type RunABatch:RunABatchViewModel}">
+        
+        <StackPanel>
+        
+            <TextBlock Text="Run Batch!"
+                   FontSize="16"/>
+                               
+            <Button Command="{Binding RunABatchCommand}"
+                    Content="Run Batch">            
+            </Button>
+            
+            <Viewbox Margin="100">
+            
+                <Image Source="..\Images\loading.jpg"
+                       Width="200"
+                       Height="200"
+                       Behaviors:AnimationBehavior.Animate="{Binding RunningBatch}"
+                       Behaviors:AnimationBehavior.Storyboard="{StaticResource RotateAnimation}"
+                       Visibility="{Binding RunningBatch, Converter={StaticResource visibilityConverter}}">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="0" CenterX="100" CenterY="100" />
+                    </Image.RenderTransform>            
+                </Image>
+            
+            </Viewbox>
+            
+        </StackPanel>        
+        
+    </DataTemplate>
+    
+</ResourceDictionary>
